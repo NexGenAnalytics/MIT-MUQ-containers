@@ -1,5 +1,5 @@
 (undo-tree-save-format-version . 1)
-"fb74825e3a8999ea205d20cf59b12ef9945e6980"
+"f94d1a12789574fd92b60c3a1a223d4f21b8d914"
 [nil nil nil nil (26390 45690 821099 0) 0 (:visualizer [0 1 0 #<marker in no buffer>])]
 ([nil nil ((#("          - {dockerfile: 'fedora-clang',        compiler-version: '17', tag: 'latest'}" 0 13 (fontified t) 13 23 (face font-lock-variable-name-face fontified t) 23 25 (fontified t) 25 39 (face font-lock-string-face fontified t) 39 48 (fontified t) 48 64 (face font-lock-variable-name-face fontified t) 64 66 (fontified t) 66 70 (face font-lock-string-face fontified t) 70 72 (fontified t) 72 75 (face font-lock-variable-name-face fontified t) 75 77 (fontified t) 77 85 (face font-lock-string-face fontified t) 85 86 (fontified t)) . 306) (t 26377 13237 787895 792000)) nil (26390 45690 821099 0) 0 (:visualizer [0 1 0 #<marker in no buffer>])])
 ([nil nil ((#("
@@ -49,5 +49,6 @@ nil
 ([nil nil ((#("G" 0 1 (fontified t)) . -1003) (undo-tree-id13 . -1) 1004) nil (26390 48350 130992 0) 0 nil])
 ([nil nil ((1003 . 1004)) nil (26390 48350 130990 0) 0 nil])
 ([nil nil ((#("A" 0 1 (fontified t)) . -1006) (undo-tree-id12 . -1) 1007) nil (26390 48350 130988 0) 0 nil])
-([nil current ((1006 . 1007)) nil (26390 48350 130974 0) 0 nil])
+([nil nil ((1006 . 1007)) nil (26390 48350 130974 0) 0 nil])
+([nil current ((1016 . 1030) (t 26390 48350 133982 173000)) nil (26390 48546 802051 0) 0 nil])
 nil
