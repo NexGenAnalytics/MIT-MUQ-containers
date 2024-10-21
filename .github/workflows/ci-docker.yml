@@ -44,7 +44,7 @@ jobs:
       - name: Build and Push Docker images for Github Container Registry
         uses: docker/build-push-action@v4
         with:
-          tags: ghcr.io/muq-containers/${{ matrix.config.dockerfile }}-${{ matrix.config.compiler-version }}:${{ matrix.config.tag }}
+          tags: ghcr.io/nexgenanalytics/${{ matrix.config.dockerfile }}-${{ matrix.config.compiler-version }}:${{ matrix.config.tag }}
           file: ${{ matrix.config.dockerfile }}.dockerfile
           build-args: |
             COMPILER_VERSION=${{ matrix.config.compiler-version }}
