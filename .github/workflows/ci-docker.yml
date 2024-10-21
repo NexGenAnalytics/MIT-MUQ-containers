@@ -1,0 +1,53 @@
+name: muq-containers
+
+on:
+  push:
+    branches:
+      - 'main'
+
+  pull_request:
+    types: [ opened, reopened, synchronize ]
+    paths:
+      - '.github/workflows/ci-docker.yml'
+      - 'docker_scripts/**'
+
+  schedule:
+    - cron:  '0 5 * * FRI'
+
+jobs:
+  CI:
+    strategy:
+      matrix:
+        config:
+          - {dockerfile: 'ubuntu-gnu', compiler-version: '11', tag: 'latest'}
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout out code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Github Container Registry
+        uses: docker/login-action@v3
+
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push Docker images for Github Container Registry
+        uses: docker/build-push-action@v4
+        with:
+          tags: ghcr.io/muq-containers/${{ matrix.config.dockerfile }}-${{ matrix.config.compiler-version }}:${{ matrix.config.tag }}
+          file: ${{ matrix.config.dockerfile }}.dockerfile
+          build-args: |
+            COMPILER_VERSION=${{ matrix.config.compiler-version }}
+            DOCKER_TAG=${{ matrix.config.tag }}
+          pull: true
+          push: true
