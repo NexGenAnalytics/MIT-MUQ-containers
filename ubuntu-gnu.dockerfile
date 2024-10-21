@@ -28,4 +28,6 @@ RUN mkdir /home/tpls
 COPY build_tpls.py /home/tpls
 RUN ls /home/tpls
 WORKDIR /home/tpls
-RUN python build_tpls.py --wdir $PWD --with hdf5 nlopt boost sundials eigen nanoflann stanmath --poolsize 1
+RUN python build_tpls.py --wdir $PWD --with eigen  --poolsize 1
+
+#hdf5 nlopt boost sundials eigen nanoflann stanmath --poolsize 1
