@@ -19,8 +19,8 @@ jobs:
     strategy:
       matrix:
         config:
-          - {dockerfile: 'ubuntu-2404-gnu', compiler-version: '11', tag: 'latest'}
-          - {dockerfile: 'ubuntu-2404-gnu-mpi', compiler-version: '11', tag: 'latest'}
+          - {dockerfile: 'ubuntu-2404-gnu', serialormpi: 'serial', compiler-version: '11', 'tag: 'latest'}
+          - {dockerfile: 'ubuntu-2404-gnu', serialormpi: 'mpi',    compiler-version: '11', tag: 'latest'}
 
     runs-on: ubuntu-latest
     permissions:
@@ -45,7 +45,7 @@ jobs:
       - name: Build and Push Docker images for Github Container Registry
         uses: docker/build-push-action@v4
         with:
-          tags: ghcr.io/nexgenanalytics/muqcontainers/${{ matrix.config.dockerfile }}-${{ matrix.config.compiler-version }}:${{ matrix.config.tag }}
+          tags: ghcr.io/nexgenanalytics/muqcontainers/${{ matrix.config.dockerfile }}-${{ matrix.config.compiler-version }}-${{ matrix.config.serialormpi }}:${{ matrix.config.tag }}
           file: ${{ matrix.config.dockerfile }}.dockerfile
           build-args: |
             COMPILER_VERSION=${{ matrix.config.compiler-version }}

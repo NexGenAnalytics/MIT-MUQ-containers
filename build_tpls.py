@@ -366,7 +366,7 @@ def build_install_parcer(
     )
 
     target = 'PARCERConfig.cmake'
-    return  "" #get_full_path_to_cmake_config_dir(install_path, target)
+    return get_full_path_to_cmake_config_dir(install_path, target)
 
 
 
