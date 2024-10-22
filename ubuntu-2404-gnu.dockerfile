@@ -5,13 +5,15 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 SHELL ["/bin/bash", "-c"]
 
+ARG COMPILER_VERSION=11
+
 RUN apt-get update -y -q && \
     apt-get upgrade -y -q && \
     apt-get install -y -q --no-install-recommends \
         ca-certificates \
         cmake \
-        gcc \
-        g++ \
+        gcc-${COMPILER_VERSION} \
+        g++-${COMPILER_VERSION} \
         git \
         libgtest-dev \
         make \
@@ -24,11 +26,14 @@ RUN apt-get update -y -q && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-ENV CC=/usr/bin/gcc
-ENV CXX=/usr/bin/g++
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100
+RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 100
+
+ENV CC=/usr/bin/gcc-${COMPILER_VERSION}
+ENV CXX=/usr/bin/g++-${COMPILER_VERSION}
 
 RUN mkdir /home/tpls
 COPY build_tpls.py /home/tpls
 RUN ls /home/tpls
 WORKDIR /home/tpls
-RUN python build_tpls.py --wdir $PWD --with hdf5 nlopt boost sundials eigen nanoflann stanmath --poolsize 1
+RUN python build_tpls.py --wdir $PWD --with hdf5 nlopt boost sundials eigen nanoflann stanmath

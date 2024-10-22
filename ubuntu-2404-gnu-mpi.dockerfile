@@ -3,13 +3,17 @@ FROM ubuntu:${UBUNTU_VERSION}
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+SHELL ["/bin/bash", "-c"]
+
+ARG COMPILER_VERSION=11
+
 RUN apt-get update -y -q && \
     apt-get upgrade -y -q && \
     apt-get install -y -q --no-install-recommends \
         ca-certificates \
         cmake \
-        gcc \
-        g++ \
+        gcc-${COMPILER_VERSION} \
+        g++-${COMPILER_VERSION} \
         git \
         libopenmpi-dev \
         libgtest-dev \
@@ -22,6 +26,9 @@ RUN apt-get update -y -q && \
         wget && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100
+RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 100
 
 # Setting environment variables
 ENV CC=/usr/bin/mpicc
