@@ -3,6 +3,8 @@ FROM ubuntu:${UBUNTU_VERSION}
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+SHELL ["/bin/bash", "-c"]
+
 RUN apt-get update -y -q && \
     apt-get upgrade -y -q && \
     apt-get install -y -q --no-install-recommends \
