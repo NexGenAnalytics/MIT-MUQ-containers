@@ -11,6 +11,7 @@ RUN apt-get update -y -q && \
         gcc \
         g++ \
         git \
+        libopenmpi-dev \
         libgtest-dev \
         make \
         software-properties-common \
@@ -22,11 +23,16 @@ RUN apt-get update -y -q && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-ENV CC=/usr/bin/gcc
-ENV CXX=/usr/bin/g++
+# Setting environment variables
+ENV CC=/usr/bin/mpicc
+ENV CXX=/usr/bin/mpic++
+ENV FC=/usr/bin/mpifort
+ENV F77=/usr/bin/mpifort
+ENV F90=/usr/bin/mpifort
+ENV MPIRUNe=/usr/bin/mpirun
 
 RUN mkdir /home/tpls
 COPY build_tpls.py /home/tpls
 RUN ls /home/tpls
 WORKDIR /home/tpls
-RUN python build_tpls.py --wdir $PWD --with hdf5 nlopt boost sundials eigen nanoflann stanmath --poolsize 1
+RUN python build_tpls.py --wdir $PWD --with all --poolsize 1

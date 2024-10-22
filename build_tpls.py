@@ -96,7 +96,8 @@ def build_install_impl(
         unpacked: Union[str, os.PathLike],
         builddir: Union[str, os.PathLike],
         installdir: Union[str, os.PathLike],
-        cmake_extra_args
+        cmake_extra_args,
+        pre_config_cb = None
 ):
     # prepare
     remove_everything_if_needed_from(parentdir, force_rebuild)
@@ -114,6 +115,9 @@ def build_install_impl(
     print("1. fetching")
     urllib.request.urlretrieve(url, zippath)
     shutil.unpack_archive(zippath, parentdir)
+
+    if pre_config_cb is not None:
+        pre_config_cb(unpacked)
 
     # configure
     print("2. configuring")
@@ -338,6 +342,15 @@ def build_install_parcer(
     install_path = os.path.join(parent_path, "install")
     custom_cmake_args = ()
 
+    def cb(source_path):
+        print(source_path)
+        top_cmake_file = os.path.join(source_path, 'CMakeLists.txt')
+        with open(top_cmake_file,'r') as file:
+            filedata = file.read()
+            filedata = filedata.replace('find_package(GTEST)','#find_package(GTEST)')
+        with open(top_cmake_file,'w') as file:
+            file.write(filedata)
+
     build_install_impl(
         myname,
         force_rebuild,
@@ -348,11 +361,12 @@ def build_install_parcer(
         unpack_path,
         build_path,
         install_path,
-        custom_cmake_args
+        custom_cmake_args,
+        cb
     )
 
     target = 'PARCERConfig.cmake'
-    return get_full_path_to_cmake_config_dir(install_path, target)
+    return  "" #get_full_path_to_cmake_config_dir(install_path, target)
 
 
 
