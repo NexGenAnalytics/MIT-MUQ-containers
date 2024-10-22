@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         config:
-          - {dockerfile: 'ubuntu-2404-gnu', serialormpi: 'serial', compiler-version: '11', 'tag: 'latest'}
+          - {dockerfile: 'ubuntu-2404-gnu', serialormpi: 'serial', compiler-version: '11', tag: 'latest'}
           - {dockerfile: 'ubuntu-2404-gnu', serialormpi: 'mpi',    compiler-version: '11', tag: 'latest'}
 
     runs-on: ubuntu-latest
