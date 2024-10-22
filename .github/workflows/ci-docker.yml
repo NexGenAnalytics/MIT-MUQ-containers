@@ -19,7 +19,8 @@ jobs:
     strategy:
       matrix:
         config:
-          - {dockerfile: 'ubuntu-gnu', compiler-version: '11', tag: 'latest'}
+          - {dockerfile: 'ubuntu-2404-gnu', compiler-version: 'default', tag: 'latest'}
+          - {dockerfile: 'ubuntu-2404-gnu-mpi', compiler-version: 'default', tag: 'latest'}
 
     runs-on: ubuntu-latest
     permissions:
