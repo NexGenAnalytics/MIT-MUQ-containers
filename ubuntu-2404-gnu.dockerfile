@@ -5,15 +5,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 SHELL ["/bin/bash", "-c"]
 
-ARG COMPILER_VERSION=11
-
 RUN apt-get update -y -q && \
     apt-get upgrade -y -q && \
     apt-get install -y -q --no-install-recommends \
         ca-certificates \
         cmake \
-        gcc-${COMPILER_VERSION} \
-        g++-${COMPILER_VERSION} \
+        gcc-11 \
+        g++-11 \
         git \
         libgtest-dev \
         make \
@@ -29,8 +27,8 @@ RUN apt-get update -y -q && \
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100
 RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 100
 
-ENV CC=/usr/bin/gcc-${COMPILER_VERSION}
-ENV CXX=/usr/bin/g++-${COMPILER_VERSION}
+ENV CC=/usr/bin/gcc-11
+ENV CXX=/usr/bin/g++-11
 
 RUN mkdir /home/tpls
 COPY build_tpls.py /home/tpls

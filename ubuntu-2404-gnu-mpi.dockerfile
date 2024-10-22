@@ -5,15 +5,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 SHELL ["/bin/bash", "-c"]
 
-ARG COMPILER_VERSION=11
-
 RUN apt-get update -y -q && \
     apt-get upgrade -y -q && \
     apt-get install -y -q --no-install-recommends \
         ca-certificates \
         cmake \
-        gcc-${COMPILER_VERSION} \
-        g++-${COMPILER_VERSION} \
+        gcc-11 \
+        g++-11 \
         git \
         libopenmpi-dev \
         libgtest-dev \
