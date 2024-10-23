@@ -10,6 +10,7 @@ RUN apt-get update -y -q && \
     apt-get install -y -q --no-install-recommends \
         ca-certificates \
         cmake \
+	doxygen \
         gcc-11 \
         g++-11 \
         git \
