@@ -25,6 +25,7 @@ RUN apt-get update -y -q && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+RUN pip install Jinja2
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100
 RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 100
 
