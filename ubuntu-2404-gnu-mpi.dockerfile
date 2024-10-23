@@ -10,7 +10,7 @@ RUN apt-get update -y -q && \
     apt-get install -y -q --no-install-recommends \
         ca-certificates \
         cmake \
-	doxygen \
+        doxygen \
         gcc-11 \
         g++-11 \
         git \
@@ -19,6 +19,7 @@ RUN apt-get update -y -q && \
         make \
         software-properties-common \
         python3-dev \
+        python3-jinja2 \
         pip \
         python-is-python3 \
         graphviz \
@@ -26,7 +27,6 @@ RUN apt-get update -y -q && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN pip install Jinja2
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100
 RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 100
 
