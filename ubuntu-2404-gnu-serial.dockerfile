@@ -19,6 +19,7 @@ RUN apt-get update -y -q && \
         software-properties-common \
         python3-dev \
         python3-jinja2 \
+        python-numpy \
         pip \
         python-is-python3 \
         graphviz \
