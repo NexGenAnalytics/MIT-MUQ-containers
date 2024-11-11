@@ -33,9 +33,9 @@ RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 100
 ENV CC=/usr/bin/gcc-11
 ENV CXX=/usr/bin/g++-11
 
-ENV pip3 install papermill ipykernel --break-system-packages 
-ENV pip3 install matplotlib h5py ipywidgets scipy --break-system-packages
-# break-system-packages needed, see: 
+RUN pip3 install papermill ipykernel --break-system-packages
+RUN pip3 install matplotlib h5py ipywidgets scipy --break-system-packages
+# break-system-packages needed, see:
 # https://stackoverflow.com/questions/75602063/pip-install-r-requirements-txt-is-failing-this-environment-is-externally-mana
 
 RUN mkdir /home/tpls
